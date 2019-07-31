@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.user.IUserDao">
+	<!-- 根据id获取信息 -->
+	<select id="findById" parameterType="String" resultType="User">
+		select *
+		from f_user
+		where keyId = #{id}
+	</select>
+	
+	<!-- 根据条件获取信息 -->
+	<select id="findByCondition" resultType="User">
+	    select *
+	    from f_user
+	    <where>
+	        <if test="userName != null and userName != ''">
+	            userName = #{userName}
+	        </if>
+	        <if test="mobile != null and mobile != ''">
+	            mobile = #{mobile}
+	        </if>
+	        <if test="nickName != null and nickName != ''">
+	            nickName = #{nickName}
+	        </if>
+	        <if test="trueName != null and trueName != ''">
+	            trueName = #{trueName}
+	        </if>
+	        <if test="sex != null and sex != ''">
+	            sex = #{sex}
+	        </if>
+	        <if test="deleteStatus != null and deleteStatus != ''">
+	            deleteStatus = #{deleteStatus}
+	        </if>
+	        <if test="isReal != null and isReal != ''">
+	            isReal = #{isReal}
+	        </if>
+	    </where>
+	</select>
+	
+	<!-- 根据条件获取获取所有信息 -->
+	<select id="findAll" resultType="User">
+	    select *
+	    from f_user
+	    <where>
+	        <if test="userName != null and userName != ''">
+	            userName = #{userName}
+	        </if>
+	        <if test="mobile != null and mobile != ''">
+	            mobile = #{mobile}
+	        </if>
+	        <if test="nickName != null and nickName != ''">
+	            nickName = #{nickName}
+	        </if>
+	        <if test="trueName != null and trueName != ''">
+	            trueName = #{trueName}
+	        </if>
+	        <if test="sex != null and sex != ''">
+	            sex = #{sex}
+	        </if>
+	        <if test="deleteStatus != null and deleteStatus != ''">
+	            deleteStatus = #{deleteStatus}
+	        </if>
+	        <if test="isReal != null and isReal != ''">
+	            isReal = #{isReal}
+	        </if>
+	    </where>
+	</select>
+	
+	<!-- 保存信息 -->
+	<insert id="save" parameterType="User">
+	    insert into f_user(keyId, userName, userPassword, mobile, nickName, trueName, sex, photo, isReal, createDate, modifyDate, deleteStatus)
+	    values (#{keyId}, #{userName}, #{userPassword}, #{mobile}, #{nickName}, #{trueName}, #{sex}, #{photo}, #{isReal}, #{createDate}, #{modifyDate}, #{deleteStatus})
+	</insert>
+	
+	<!-- 修改信息 -->
+	<update id="update" parameterType="User">
+	    update f_user set
+	    	userName = #{userName}, userPassword = #{userPassword}, mobile = #{mobile}, nickName = #{nickName}, trueName = #{trueName}, sex = #{sex}, photo = #{photo},
+	    	isReal = #{isReal}, createDate = #{createDate}, modifyDate = #{modifyDate}, deleteStatus = #{deleteStatus}
+	    where id = #{id}
+	</update>
+	
+	<!-- 根据id删除信息 -->
+	<delete id="delete" parameterType="String">
+	    delete from f_user where id = #{id}
+	</delete>
+</mapper>
